@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="yoren">
+    
+    <title>
+        
+            二叉树 |
+        
+        yoRen&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.jpeg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"yorenchen.github.io","root":"/","language":"en"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","avatar":"/images/avatar.jpeg","favicon":"/images/logo.jpeg","article_img_align":"left","left_side_width":"260px","content_max_width":"1180px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":true}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                yoRen&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               target="_blank" rel="noopener" href="https://github.com/YoRenChen"
+                            >
+                                GITHUB
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       target="_blank" rel="noopener" href="https://github.com/YoRenChen">GITHUB</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">二叉树</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.jpeg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">yoren</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-02-10 00:00:00</span>
+        <span class="mobile">2022-02-10 00:00</span>
+    </span>
+    
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>4 Mins</span>
+        </span>
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="二叉树-binary-tree"><a href="#二叉树-binary-tree" class="headerlink" title="二叉树 binary-tree"></a>二叉树 binary-tree</h1><p>遇到一道二叉树的题目时的通用思考过程是：</p>
+<p>1、是否可以通过遍历一遍二叉树得到答案？如果可以，用一个 traverse 函数配合外部变量来实现。</p>
+<p>2、是否可以定义一个递归函数，通过子问题（子树）的答案推导出原问题的答案？如果可以，写出这个递归函数的定义，并充分利用这个函数的返回值。</p>
+<p>3、无论使用哪一种思维模式，你都要明白二叉树的每一个节点需要做什么，需要在什么时候（前中后序）做。</p>
+<h2 id="二叉树种类"><a href="#二叉树种类" class="headerlink" title="二叉树种类"></a>二叉树种类</h2><h3 id="二叉搜索树"><a href="#二叉搜索树" class="headerlink" title="二叉搜索树"></a>二叉搜索树</h3><p>特点：</p>
+<ol>
+<li><p>左边子树数值 &lt; 当前值 &lt; 右边子树数值<br>(root.left.val &lt; root.val &lt; root.rigth.val)</p>
+</li>
+<li><p>左子树上所有结点的值 &lt;&#x3D; 它根结点的值</p>
+</li>
+<li><p>右子树上所有结点的值 &gt;&#x3D; 它根结点的值</p>
+</li>
+<li><p>中序遍历的二叉搜索树一定是升序的</p>
+</li>
+</ol>
+<h3 id="满二叉树"><a href="#满二叉树" class="headerlink" title="满二叉树"></a>满二叉树</h3><h3 id="完全二叉树"><a href="#完全二叉树" class="headerlink" title="完全二叉树"></a>完全二叉树</h3><h3 id="平衡二叉树（AVL）"><a href="#平衡二叉树（AVL）" class="headerlink" title="平衡二叉树（AVL）"></a>平衡二叉树（AVL）</h3><ol>
+<li>平衡二叉搜索树中每个结点的左子树和右子树的高度最多相差 1；</li>
+<li>平衡二叉搜索树的子树也是平衡二叉搜索树；</li>
+<li>一棵存有 n 个结点的平衡二叉搜索树的高度是 O(logn)。</li>
+</ol>
+<h2 id="其他概念"><a href="#其他概念" class="headerlink" title="其他概念"></a>其他概念</h2><p>自顶向下为深度；<br>自底向上为高度；</p>
+<h2 id="深度遍历-DFS"><a href="#深度遍历-DFS" class="headerlink" title="深度遍历 DFS"></a>深度遍历 DFS</h2><p>遍历框架</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">funciton traverse(TreeNode root) &#123;</span><br><span class="line">    if (root == null) &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    // 前序位置</span><br><span class="line">    traverse(root.left);</span><br><span class="line">    // 中序位置</span><br><span class="line">    traverse(root.right);</span><br><span class="line">    // 后序位置</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="先中后序基础"><a href="#先中后序基础" class="headerlink" title="先中后序基础"></a>先中后序基础</h3><h4 id="先序遍历"><a href="#先序遍历" class="headerlink" title="先序遍历"></a>先序遍历</h4><p>【快速排序】<br>遍历顺序：当前节点 -&gt; 左边子节点 -&gt; 右边子节点</p>
+<h4 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h4><p>主要用在 BST 场景。</p>
+<p>特点：升序序列。</p>
+<p>遍历顺序：左边子节点 -&gt; 当前节点 -&gt; 右边子节点</p>
+<h4 id="后序遍历"><a href="#后序遍历" class="headerlink" title="后序遍历"></a>后序遍历</h4><p>【归并排序】<br>遍历顺序：左边子节点 -&gt; 右边子节点 -&gt; 当前节点<br>后序遍历的最后一个节点为根节点</p>
+<blockquote>
+<p>发现题目和子树有关，那大概率要给函数设置合理的定义和返回值，在后序位置写代码。（力扣第 543 题「 二叉树的直径」）</p>
+</blockquote>
+<h3 id="先中后序递归与非递归"><a href="#先中后序递归与非递归" class="headerlink" title="先中后序递归与非递归"></a>先中后序递归与非递归</h3><h4 id="先序遍历-DLR"><a href="#先序遍历-DLR" class="headerlink" title="先序遍历-DLR"></a>先序遍历-DLR</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"># 递归 O(n)</span><br><span class="line">function inorderTraversal(root) &#123;</span><br><span class="line">    const res = []</span><br><span class="line">    const findNode = (node) =&gt; &#123;</span><br><span class="line">        if (node === null) return</span><br><span class="line">        res.push(node.val)</span><br><span class="line">        //递归遍历左子树</span><br><span class="line">        findNode(node.left)</span><br><span class="line">        //递归遍历右子树</span><br><span class="line">        findNode(node.right)</span><br><span class="line">    &#125;</span><br><span class="line">    findNode(root)</span><br><span class="line">    return res</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 栈迭代 O(n)</span><br><span class="line">function persentTraversal(root) &#123;</span><br><span class="line">    if (root === null) return []</span><br><span class="line">    const res = []</span><br><span class="line">    const stk = []</span><br><span class="line">    while(root || stk.length &gt; 0) &#123;</span><br><span class="line">        while(root) &#123;</span><br><span class="line">            stk.push(root)</span><br><span class="line">            res.push(root.val)</span><br><span class="line">            root = root.l</span><br><span class="line">        &#125;</span><br><span class="line">        root = stk.pop()</span><br><span class="line">        root = root.r</span><br><span class="line">    &#125;</span><br><span class="line">    return res</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const root = [1,null,2,3]</span><br><span class="line">&gt; res = [1,2,3]</span><br></pre></td></tr></table></figure>
+
+<h4 id="中序遍历-LDR"><a href="#中序遍历-LDR" class="headerlink" title="中序遍历-LDR"></a>中序遍历-LDR</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"># 递归</span><br><span class="line">function inorderTraversal1(root) &#123;</span><br><span class="line">    if(root === null)return null</span><br><span class="line">    const res = []</span><br><span class="line">    function loop(p) &#123;</span><br><span class="line">        if (!p) return</span><br><span class="line">        loop(p.l)</span><br><span class="line">        res.push(p.val)</span><br><span class="line">        loop(p.r)</span><br><span class="line">    &#125;</span><br><span class="line">    loop(root)</span><br><span class="line">    return res</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 栈排序</span><br><span class="line">function inorderTraversal(root) &#123;</span><br><span class="line">    if(root === null)return null</span><br><span class="line">    const res = []</span><br><span class="line">    const stk = []</span><br><span class="line">    while(root || stk.length &gt;0)&#123;</span><br><span class="line">        while(root) &#123;</span><br><span class="line">            stk.push(root)</span><br><span class="line">            root = root.l</span><br><span class="line">        &#125;</span><br><span class="line">        root = stk.pop()</span><br><span class="line">        res.push(root.val)</span><br><span class="line">        root = root.r</span><br><span class="line">    &#125;</span><br><span class="line">    return res</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="后序遍历-LRD"><a href="#后序遍历-LRD" class="headerlink" title="后序遍历-LRD"></a>后序遍历-LRD</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#递归</span><br><span class="line">function postOrderTraversal(root) &#123;</span><br><span class="line">    if (!root) return null</span><br><span class="line">    const res = []</span><br><span class="line">    function loop(p) &#123;</span><br><span class="line">        if(!p) return</span><br><span class="line">        loop(p.r)</span><br><span class="line">        loop(p.l)</span><br><span class="line">        res.push(p.val)</span><br><span class="line">    &#125;</span><br><span class="line">    loop(root)</span><br><span class="line">    return res</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 栈</span><br><span class="line">function postOrder(tree) &#123;</span><br><span class="line">    const res = []</span><br><span class="line">    const stk = [tree]</span><br><span class="line">    while(stk.length) &#123;</span><br><span class="line">        const node = stk.pop()</span><br><span class="line">        if (node.left) stk.push(node.left)</span><br><span class="line">        if (node.right) stk.push(node.right)</span><br><span class="line">        res.unshift(node.val)</span><br><span class="line">    &#125;</span><br><span class="line">    return res</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">unshift 顺序插入是 DRL，故用 pop 先取 right,输出LRD</span><br></pre></td></tr></table></figure>
+
+<h2 id="前中后序逆转"><a href="#前中后序逆转" class="headerlink" title="前中后序逆转"></a>前中后序逆转</h2><h3 id="二叉树对称性递归的解题模板"><a href="#二叉树对称性递归的解题模板" class="headerlink" title="二叉树对称性递归的解题模板"></a>二叉树对称性递归的解题模板</h3><p>1、递归结束条件：特殊情况的判断<br>如果是单树问题，一般来说只要进行以下判断：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if(!root) return true/false;</span><br><span class="line">if(!root-&gt;left) return true/false/递归函数;</span><br><span class="line">if(!root-&gt;right) return true/false/递归函数;</span><br></pre></td></tr></table></figure>
+
+<p>如果是双树问题(根节点分别为 p,q)，一般来说进行以下判断：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">if(!p &amp;&amp; !q)return true/false;</span><br><span class="line">if(!p || !q)return true/false;</span><br></pre></td></tr></table></figure>
+
+<p>判断是否相同的树</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const isSameTree = () =&gt; &#123;</span><br><span class="line">    if (!q &amp;&amp; !p) return true</span><br><span class="line">    return p &amp;&amp; q &amp;&amp;</span><br><span class="line">        p.value === q.value &amp;&amp;</span><br><span class="line">        isSameTree(p.left, q.left) &amp;&amp;</span><br><span class="line">        isSameTree(p.right, q.right)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/03/01/%E4%BA%8C%E5%8F%89%E6%A0%91%20copy/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">LRU 缓存</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/01/04/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">回溯算法</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">yoren</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91-binary-tree"><span class="nav-text">二叉树 binary-tree</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%A7%8D%E7%B1%BB"><span class="nav-text">二叉树种类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91"><span class="nav-text">二叉搜索树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BB%A1%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-text">满二叉树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-text">完全二叉树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%88AVL%EF%BC%89"><span class="nav-text">平衡二叉树（AVL）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E6%A6%82%E5%BF%B5"><span class="nav-text">其他概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E9%81%8D%E5%8E%86-DFS"><span class="nav-text">深度遍历 DFS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%88%E4%B8%AD%E5%90%8E%E5%BA%8F%E5%9F%BA%E7%A1%80"><span class="nav-text">先中后序基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%88%E5%BA%8F%E9%81%8D%E5%8E%86"><span class="nav-text">先序遍历</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86"><span class="nav-text">中序遍历</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86"><span class="nav-text">后序遍历</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%88%E4%B8%AD%E5%90%8E%E5%BA%8F%E9%80%92%E5%BD%92%E4%B8%8E%E9%9D%9E%E9%80%92%E5%BD%92"><span class="nav-text">先中后序递归与非递归</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%88%E5%BA%8F%E9%81%8D%E5%8E%86-DLR"><span class="nav-text">先序遍历-DLR</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86-LDR"><span class="nav-text">中序遍历-LDR</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86-LRD"><span class="nav-text">后序遍历-LRD</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E4%B8%AD%E5%90%8E%E5%BA%8F%E9%80%86%E8%BD%AC"><span class="nav-text">前中后序逆转</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AF%B9%E7%A7%B0%E6%80%A7%E9%80%92%E5%BD%92%E7%9A%84%E8%A7%A3%E9%A2%98%E6%A8%A1%E6%9D%BF"><span class="nav-text">二叉树对称性递归的解题模板</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

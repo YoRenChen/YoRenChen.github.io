@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="yoren">
+    
+    <title>
+        
+            gRPC h5调研 |
+        
+        yoRen&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.jpeg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"yorenchen.github.io","root":"/","language":"en"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","avatar":"/images/avatar.jpeg","favicon":"/images/logo.jpeg","article_img_align":"left","left_side_width":"260px","content_max_width":"1180px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":true}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                yoRen&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               target="_blank" rel="noopener" href="https://github.com/YoRenChen"
+                            >
+                                GITHUB
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       target="_blank" rel="noopener" href="https://github.com/YoRenChen">GITHUB</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">gRPC h5调研</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.jpeg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">yoren</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2020-05-28 00:00:00</span>
+        <span class="mobile">2020-05-28 00:00</span>
+    </span>
+    
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>720 Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>2 Mins</span>
+        </span>
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="gRPC-简介"><a href="#gRPC-简介" class="headerlink" title="gRPC 简介"></a>gRPC 简介</h2><p>官方地址：<a class="link"   target="_blank" rel="noopener" href="https://grpc.io/docs/what-is-grpc/introduction/" >Introduction to gRPC<i class="fas fa-external-link-alt"></i></a></p>
+<p>gRPC 是一个高性能、通用的开源 RPC 框架，其由 Google 主要面向移动应用开发并基于 HTTP&#x2F;2 协议标准而设计，基于 ProtoBuf(Protocol Buffers) 序列化协议开发</p>
+<p>一些 HTTP&#x2F;2 的术语：</p>
+<p>Stream： 一个双向流，一条连接可以有多个 streams。</p>
+<p>Message： 也就是逻辑上面的 request，response。</p>
+<p>Frame:：数据传输的最小单位。每个 Frame 都属于一个特定的 stream 或者整个连接。一个 message 可能有多个 frame 组成。</p>
+<p>gRPC 通常有四种模式：</p>
+<p>unary：一元请求，一请求一返回</p>
+<p>client streaming：客户端通过流向服务端发送一系列消息，然后等待服务端读取完数据并返回处理结果</p>
+<p>server streaming：客户端发送一个请求，服务端返回一个流给客户端，客户从流中读取一系列消息，直到读取完成</p>
+<p>bidirectional streaming：客户端和服务端都可以独立向对方发送或接受一系列的消息。客户端和服务端读写的顺序是任意。</p>
+<h2 id="ProtoBuf"><a href="#ProtoBuf" class="headerlink" title="ProtoBuf"></a>ProtoBuf</h2><p>是作为 gRPC 的 IDL（接口定义语言）来定义信息交换格式的</p>
+<p>关于 Protocol Buffers：<a class="link"   target="_blank" rel="noopener" href="https://developers.google.com/protocol-buffers/docs/proto3" >Language Guide (proto3) | Protocol Buffers | Google Developers<i class="fas fa-external-link-alt"></i></a></p>
+<h2 id="Grpc-In-Browser"><a href="#Grpc-In-Browser" class="headerlink" title="Grpc In Browser"></a>Grpc In Browser</h2><p><a class="link"   target="_blank" rel="noopener" href="https://grpc.io/blog/state-of-grpc-web/" >The state of gRPC in the browser<i class="fas fa-external-link-alt"></i></a></p>
+<p>js 不能强制使用 http2，也无法进行细粒度的控制</p>
+<p>浏览器支持 http2 更多的是在底层，比如资源加载的时候</p>
+<p>各个 grpc 库的支持<br>GitHub - johanbrandhorst&#x2F;grpc-web-compatibility-test: Test various implementations of gRPC-Web Clients with various implementations of gRPC-Web proxies</p>
+<p>所有的库都是基于 http1.1 进行的降级处理，目前它们都需要额外的 proxy 支持</p>
+<p>grpcWeb 是官方的，需要 envoy。improbable 需要 grpcwebproxy（一个 go 语言的 proxy）</p>
+<p>其中 improbableWS 是基于 websocket 的</p>
+<p>开发过程：通过对 Protocol Buffers 格式的.proto 文件进行编译，编译成对应语言的 js 或者 ts 的代码，代码包含 client 和请求方法。调用相关函数，设置参数完成请求调用</p>
+<p>（PS：后端自身的 grpc 调试工具，grpcui，貌似本质上是基于 go 语言的 client，只是在 web 浏览器进行表单的形式的组织。）</p>
+<p>protoc 全局编译工具<br>.proto 文件需要全局编译工具 mac 推荐 brew 安装 brew install protobuf</p>
+<p>对于非 mac，安装包地址见 <a class="link"   target="_blank" rel="noopener" href="https://github.com/protocolbuffers/protobuf/releases" >Releases · protocolbuffers&#x2F;protobuf<i class="fas fa-external-link-alt"></i></a><br>eg：for windows，<a class="link"   target="_blank" rel="noopener" href="https://codeload.github.com/protocolbuffers/protobuf/zip/v3.15.6" >https://codeload.github.com/protocolbuffers/protobuf/zip/v3.15.6<i class="fas fa-external-link-alt"></i></a></p>
+<p>该工具具备插件功能，前面提到的两个 gRPC-web 工具，由于实现不同，非官方的那个用了自定义的插件，所以虽然都是 js，实际上打包出来代码是不一样的。</p>
+<p>TODO:<br>所以目前后端 grpc 对 h5 是转 restful 提供接口（一个 go 的 grpc-gateway）。</p>
+<p>但期望是一份文件对多端都有约束。</p>
+<p>h5 这边目前没能像其它端一样自动生成代码。</p>
+
+        </div>
+
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2020/07/03/vue%20%E6%89%93%E5%8C%85%E4%BC%98%E5%8C%96/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">vue打包优化</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2020/03/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">设计模式-发布订阅</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">yoren</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#gRPC-%E7%AE%80%E4%BB%8B"><span class="nav-text">gRPC 简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ProtoBuf"><span class="nav-text">ProtoBuf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Grpc-In-Browser"><span class="nav-text">Grpc In Browser</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

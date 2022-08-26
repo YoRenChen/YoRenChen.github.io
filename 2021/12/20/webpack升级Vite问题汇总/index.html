@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="yoren">
+    
+    <title>
+        
+            webpack升级Vite问题汇总 |
+        
+        yoRen&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.jpeg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"yorenchen.github.io","root":"/","language":"en"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","avatar":"/images/avatar.jpeg","favicon":"/images/logo.jpeg","article_img_align":"left","left_side_width":"260px","content_max_width":"1180px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":true}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                yoRen&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               target="_blank" rel="noopener" href="https://github.com/YoRenChen"
+                            >
+                                GITHUB
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       target="_blank" rel="noopener" href="https://github.com/YoRenChen">GITHUB</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">webpack升级Vite问题汇总</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.jpeg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">yoren</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-12-20 00:00:00</span>
+        <span class="mobile">2021-12-20 00:00</span>
+    </span>
+    
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>354 Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>1 Mins</span>
+        </span>
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="webpack升级Vite问题汇总"><a href="#webpack升级Vite问题汇总" class="headerlink" title="webpack升级Vite问题汇总"></a>webpack升级Vite问题汇总</h1><h4 id="The-following-dependencies-are-imported-but-could-not-be-resolved"><a href="#The-following-dependencies-are-imported-but-could-not-be-resolved" class="headerlink" title="The following dependencies are imported but could not be resolved"></a>The following dependencies are imported but could not be resolved</h4><p>【别名未正确配置】</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import &#123; defineConfig &#125; from &#x27;vite&#x27;</span><br><span class="line">import &#123; createVuePlugin &#125; from &quot;vite-plugin-vue2&quot;</span><br><span class="line"></span><br><span class="line">export default defineConfig(&#123;</span><br><span class="line">  plugins: [createVuePlugin()],</span><br><span class="line">  resolve: &#123;</span><br><span class="line">    /** 添加alias规则 */</span><br><span class="line">    alias: [</span><br><span class="line">      &#123; find: &#x27;@/&#x27;, replacement: &#x27;/src/&#x27; &#125;</span><br><span class="line">    ],</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="Failed-to-resolve-import-“-x2F-App”-from-“src-x2F-main-js"><a href="#Failed-to-resolve-import-“-x2F-App”-from-“src-x2F-main-js" class="headerlink" title="Failed to resolve import “.&#x2F;App” from “src&#x2F;main.js"></a>Failed to resolve import “.&#x2F;App” from “src&#x2F;main.js</h4><p>【引入App组件的时候没有带文件后缀.vue】</p>
+<ol>
+<li>手动添加.vue后缀</li>
+<li>配置vite.config.js的extensions字段，来添加自动查找文件扩展名后缀  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export default defineConfig(&#123;</span><br><span class="line">    extensions: [&quot;.vue&quot;, &quot;.js&quot;, &quot;.ts&quot;],</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="dependency-“less”-not-found-Did-you-install-it"><a href="#dependency-“less”-not-found-Did-you-install-it" class="headerlink" title="dependency “less” not found. Did you install it"></a>dependency “less” not found. Did you install it</h4>【安装vite中解析less插件】<br><code>npm install less -D</code></li>
+</ol>
+<p>在vite中只需要安装，vite会自动处理sass,less文件。</p>
+<h4 id="Internal-server-error-‘-ant…-x2F-default-less’-wasn’t-found"><a href="#Internal-server-error-‘-ant…-x2F-default-less’-wasn’t-found" class="headerlink" title="Internal server error: ‘~ant…&#x2F;default.less’ wasn’t found."></a>Internal server error: ‘~ant…&#x2F;default.less’ wasn’t found.</h4><p>直接引入 @import ‘~组件库.less’样式库导致</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">export default defineConfig(&#123;</span><br><span class="line">  // ...</span><br><span class="line">  resolve: &#123;</span><br><span class="line">    alias: [</span><br><span class="line">      &#123; find: /^~/, replacement: &#x27;&#x27; &#125;</span><br><span class="line">    ],</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="require-is-not-defined"><a href="#require-is-not-defined" class="headerlink" title="require is not defined"></a>require is not defined</h4><p>vite 不支持 <code>require</code></p>
+<ol>
+<li>使用 ES6 import</li>
+<li>路径访问</li>
+<li>import.meta.glob()，异步，适合配置懒加载动态路由</li>
+</ol>
+<h4 id="Failed-to-resolve-import-‘-x2F-xxx-png’"><a href="#Failed-to-resolve-import-‘-x2F-xxx-png’" class="headerlink" title="Failed to resolve import ‘..&#x2F;xxx.png’."></a>Failed to resolve import ‘..&#x2F;xxx.png’.</h4><p>注意编译之后的路径是public</p>
+<h4 id="处理项目兼容低版本浏览器"><a href="#处理项目兼容低版本浏览器" class="headerlink" title="处理项目兼容低版本浏览器"></a>处理项目兼容低版本浏览器</h4><p><code>@vitejs/plugin-legacy</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import legacy from &#x27;@vitejs/plugin-legacy&#x27;</span><br><span class="line"></span><br><span class="line">legacy(&#123;</span><br><span class="line">  targets: [&#x27;ie &gt;= 9&#x27;],</span><br><span class="line">  additionalLegacyPolyfills: [&#x27;regenerator-runtime/runtime&#x27;],</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="css-前缀"><a href="#css-前缀" class="headerlink" title="css 前缀"></a>css 前缀</h4><p><code>npx install autoprefixer -D</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">css: &#123;</span><br><span class="line">    postcss: &#123;</span><br><span class="line">      plugins: [</span><br><span class="line">        require(&#x27;autoprefixer&#x27;)(&#123;</span><br><span class="line">          overrideBrowserslist: [&#x27;Android 4.1&#x27;, &#x27;iOS 7.1&#x27;, &#x27;Chrome &gt; 31&#x27;, &#x27;ff &gt; 31&#x27;, &#x27;ie &gt;= 9&#x27;, &#x27;&gt; 1%&#x27;],</span><br><span class="line">          grid: true,</span><br><span class="line">        &#125;),</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/01/03/%E5%BF%AB%E6%8E%92%E4%B8%8E%E4%B8%89%E8%B7%AF%E5%BF%AB%E6%8E%92/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">快排与三路快排</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/12/01/http2%E4%BD%BF%E7%94%A8/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">http2使用</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">yoren</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#webpack%E5%8D%87%E7%BA%A7Vite%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB"><span class="nav-text">webpack升级Vite问题汇总</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#The-following-dependencies-are-imported-but-could-not-be-resolved"><span class="nav-text">The following dependencies are imported but could not be resolved</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Failed-to-resolve-import-%E2%80%9C-x2F-App%E2%80%9D-from-%E2%80%9Csrc-x2F-main-js"><span class="nav-text">Failed to resolve import “.&#x2F;App” from “src&#x2F;main.js</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dependency-%E2%80%9Cless%E2%80%9D-not-found-Did-you-install-it"><span class="nav-text">dependency “less” not found. Did you install it</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Internal-server-error-%E2%80%98-ant%E2%80%A6-x2F-default-less%E2%80%99-wasn%E2%80%99t-found"><span class="nav-text">Internal server error: ‘~ant…&#x2F;default.less’ wasn’t found.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#require-is-not-defined"><span class="nav-text">require is not defined</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Failed-to-resolve-import-%E2%80%98-x2F-xxx-png%E2%80%99"><span class="nav-text">Failed to resolve import ‘..&#x2F;xxx.png’.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E9%A1%B9%E7%9B%AE%E5%85%BC%E5%AE%B9%E4%BD%8E%E7%89%88%E6%9C%AC%E6%B5%8F%E8%A7%88%E5%99%A8"><span class="nav-text">处理项目兼容低版本浏览器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#css-%E5%89%8D%E7%BC%80"><span class="nav-text">css 前缀</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>
